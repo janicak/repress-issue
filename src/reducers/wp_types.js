@@ -1,4 +1,4 @@
-import { handler } from '@humanmade/repress';
+import { handler } from '../lib/repress/index.js';
 
 export const SITE_HOME = "https://www.darkenergybiosphere.org";
 const API_ROOT = SITE_HOME + '/wp-json/';

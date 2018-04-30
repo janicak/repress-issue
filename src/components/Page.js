@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { pages, SITE_HOME } from '../reducers/wp_types';
-import { withArchive } from '@humanmade/repress';
+import { withArchive } from '../lib/repress/index.js';
 
 import { normalizePath } from '../util';
 
@@ -19,8 +19,7 @@ const Page = props => {
   if ( ! posts ) {
     return <p>404</p>;
   }
-  let siteHome = (SITE_HOME.replace('http://', '').replace('https://', ''));
-  const page = posts.find( post => post.link === SITE_HOME + path + '/' );
+  const page = posts.find( post => post.link.match(path) );
   if ( ! page ) {
     return <p>Also 404</p>;
   }
@@ -32,8 +31,14 @@ const Page = props => {
           replace: (domNode) => {
             if (domNode.name === 'a' && domNode.attribs.hasOwnProperty('href')) {
               const { href } = domNode.attribs;
-              if ( href.match(siteHome)){
-                const to = href.replace('http://' + siteHome, '').replace('https://' + siteHome, '');
+              if (
+                href.match(SITE_HOME)
+                || href.match(SITE_HOME.replace('https://', 'http://'))
+                || href.match(SITE_HOME.replace('http://', 'https://'))
+              ) {
+                const to = href.replace(SITE_HOME, '')
+                  .replace(SITE_HOME.replace('https://', 'http://'), '')
+                  .replace(SITE_HOME.replace('htts://', 'https://'), '');
                 return <Link to={to}>{domToReact(domNode.children.filter(node => node.name !== 'u'))}</Link>;
               }
             }
