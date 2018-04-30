@@ -19,7 +19,7 @@ const Page = props => {
   if ( ! posts ) {
     return <p>404</p>;
   }
-  console.log(SITE_HOME);
+  let siteHome = (SITE_HOME.replace('http://', '').replace('https://', ''));
   const page = posts.find( post => post.link === SITE_HOME + path + '/' );
   if ( ! page ) {
     return <p>Also 404</p>;
@@ -32,8 +32,8 @@ const Page = props => {
           replace: (domNode) => {
             if (domNode.name === 'a' && domNode.attribs.hasOwnProperty('href')) {
               const { href } = domNode.attribs;
-              if ( href.match(SITE_HOME)){
-                const to = href.replace(SITE_HOME, '');
+              if ( href.match(siteHome)){
+                const to = href.replace('http://' + siteHome, '').replace('https://' + siteHome, '');
                 return <Link to={to}>{domToReact(domNode.children.filter(node => node.name !== 'u'))}</Link>;
               }
             }

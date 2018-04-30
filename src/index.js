@@ -19,7 +19,7 @@ const ConnectedSwitch = connect(state => ({
 
 const AppContainer = () => (
   <ConnectedSwitch>
-    <Route exact path="/" render={() => <Redirect to="/outputs-resources/networked-speaker-series"/> } />
+    <Route exact path="/" render={() => <Redirect to="/about-our-center/introduction/"/> } />
     <Route path="/:slug" component={Page} />
   </ConnectedSwitch>
 );
