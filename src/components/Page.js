@@ -28,7 +28,7 @@ const Page = props => {
     <div className="Page">
       <h1 dangerouslySetInnerHTML={ { __html: page.title.rendered } }/>
       <div className="PageContent">
-        { Parser(page.content. rendered, {
+        { Parser(page.content.rendered, {
           replace: (domNode) => {
             if (domNode.name === 'a' && domNode.attribs.hasOwnProperty('href')) {
               const { href } = domNode.attribs;
