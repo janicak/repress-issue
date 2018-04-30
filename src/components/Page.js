@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { pages, SITE_HOME } from '../reducers/wp_types';
+//import { withArchive } from '@humanmade/repress';
 import { withArchive } from '../lib/repress/index.js';
 
 import { normalizePath } from '../util';
