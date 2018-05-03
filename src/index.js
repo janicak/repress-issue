@@ -6,7 +6,7 @@ import { Provider, connect } from 'react-redux';
 import configureStore from './store/configureStore';
 
 import { ConnectedRouter } from 'react-router-redux'
-import { Route, Switch, Redirect } from 'react-router';
+import { Route, Switch, Redirect, withRouter } from 'react-router';
 import history from './store/routerHistory';
 
 import Page from './components/Page';
@@ -24,9 +24,9 @@ const AppContainer = () => (
   </ConnectedSwitch>
 );
 
-const App = hot(module)(connect(state => ({
+const App = hot(module)(withRouter(connect(state => ({
   location: state.location,
-}))(AppContainer));
+}))(AppContainer)));
 
 const store = configureStore();
 
