@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { pages, SITE_HOME } from '../reducers/wp_types';
-//import { withArchive } from '@humanmade/repress';
-import withArchive from '../util/withArchive.js';
+import { withArchive } from '@humanmade/repress';
 
 import { normalizePath } from '../util';
 
@@ -54,10 +53,7 @@ export default withArchive(
   pages,
   state => state.pages,
   props => {
-    let path = normalizePath(props.location.pathname);
-    if (props.history.action === 'PUSH'){
-      path = normalizePath(props.history.location.pathname);
-    }
+    const path = normalizePath(props.location.pathname);
     const id = `_page/${ path }`;
     const slug = path.split( '/' ).slice( -1 )[0];
     pages.registerArchive( id, {
